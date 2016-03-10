@@ -17,7 +17,25 @@ var db = mysql.createPool({
 
 
 var server = http.createServer(function(req, res) {
-  db.query('select * from country', function(err, res) {
+  db.query('select * from country', function(err, result) {
+    if (err) {
+      console.log(err);
+      res.end('Error')
+    } else {
+
+      var sqlResult = '';
+      for (var i=0; i  < result.length; i++) {
+        sqlResult += result[i].name + '\n';
+      }
+
+
+
+      res.end(sqlResult);
+      console.log(sqlResult);
+
+
+    }
+
 
   });
 });
